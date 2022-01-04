@@ -1,0 +1,11 @@
+version: "3"
+services:
+  qiushaocloud-redis-server:
+    image: qiushaocloud/redis
+    container_name: qiushaocloud-redis-server
+    hostname: qiushaocloud-redis-server
+    ports:
+      - "$REDIS_PORT:$REDIS_CFG_PORT"
+    volumes:
+      - $REDIS_DATA_PATH:$REDIS_CFG_DATA_DIR
+      - $REDIS_CFG_FILE_PATH:/etc/redis/redis.conf

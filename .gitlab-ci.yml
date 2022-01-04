@@ -1,0 +1,22 @@
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  only:
+    - master
+  script:
+    - docker build -t qiushaocloud/redis:latest .
+  tags:
+    - qiushaocloud-runner
+
+deploy:
+  stage: deploy
+  only:
+    - master
+  script:
+    - docker login --username $DOCKER_HUB_USER_NAME --password $DOCKER_HUB_USER_PASSWORD
+    - docker push qiushaocloud/redis:latest
+  tags:
+    - qiushaocloud-runner
